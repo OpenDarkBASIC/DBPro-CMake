@@ -41,7 +41,7 @@ void checkCollision()
 		checkTriangle(&collisionPackage, eP1, eP2, eP3);
 	}
 
-	for(i=0; i < numcilinder ; i++) //Iterate trough the entire cilinder pool
+	for(int i=0; i < numcilinder ; i++) //Iterate trough the entire cilinder pool
 	{
 		checkCilinder(&collisionPackage, cilinder_pos[i], cilinder_radius[i]);
 	}

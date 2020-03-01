@@ -152,7 +152,7 @@ BRUSH* ConvertXModelToBrushFormat ( char* szFilename, BRUSH* pBrush, int* piCoun
 
 	// variable declarations
 	tagModelData*			ptr;				// model data
-	LPDIRECT3DVERTEXBUFFER8 pMeshVertexBuffer;	// vertex buffer
+	LPDIRECT3DVERTEXBUFFER9 pMeshVertexBuffer;	// vertex buffer
 	LPDIRECT3DINDEXBUFFER8  pMeshIndexBuffer;	// index buffer
 	sMeshData*				pMeshVertices;		// mesh vertices
 	WORD*					pMeshIndices;		// mesh indices

@@ -18,7 +18,7 @@
 #pragma warning( pop )
 using namespace std;
 #include "dxdiaginfo.h"
-#include "resource.h"
+//#include "resource.h"
 
 
 

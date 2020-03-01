@@ -127,7 +127,7 @@ static bool point_in_poly ( const D3DXVECTOR3& p )
 
     float total = 0.0f;
 
-    for ( i = 0; i < cache.count - 1; i++ )
+    for ( int i = 0; i < cache.count - 1; i++ )
 	{
 		total += ( float ) acos ( D3DXVec3Dot ( &v [ i ], &v [ i + 1 ] ) );
 	}
@@ -177,7 +177,7 @@ static D3DXVECTOR3 closest_on_poly ( const D3DXVECTOR3& p, D3DXVECTOR3* line_dir
 		d [ i ] = D3DXVec3Length ( &t );
     }
 
-    i = cache.count-1;
+    int i = cache.count-1;
 
     v [ i ] = closest_on_line ( cache.vertex [ i ], cache.vertex [ 0 ], p );
     
@@ -189,7 +189,7 @@ static D3DXVECTOR3 closest_on_poly ( const D3DXVECTOR3& p, D3DXVECTOR3* line_dir
     D3DXVECTOR3 r = v [ 0 ];
 	int cl_line = 0;
 
-    for ( i = 1; i < cache.count; i++ ) 
+    for ( int i = 1; i < cache.count; i++ ) 
 	{
         if ( d [ i ] < min )
 		{

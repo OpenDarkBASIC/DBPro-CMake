@@ -212,8 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Shared\Core\globstruct.h" />
-    <ClInclude Include="..\..\Shared\DB3\DB3.h" />
-    <ClInclude Include="..\..\Shared\DB3\DB3Math.h" />
     <ClInclude Include="..\..\Shared\Transforms\OptimizedMath.h" />
     <ClInclude Include="..\..\Shared\Transforms\Transform.h" />
     <ClInclude Include="..\..\Shared\Transforms\TransformsAPI.h" />

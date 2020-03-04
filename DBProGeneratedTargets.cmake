@@ -20,9 +20,11 @@ set(DBPRO_ADVANCEDMATRIX_SRCS
   "${SDK_DIR}/Shared/Error/CRuntimeErrors.h"
 )
 add_library(DBProAdvancedMatrix ${DBPRO_ADVANCEDMATRIX_SRCS})
-target_include_directories(DBProAdvancedMatrix PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProAdvancedMatrix DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProAdvancedMatrix PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProAdvancedMatrix PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_ANIMATION_SRCS
   "${SDK_DIR}/DarkSDK/Animation/DLLMain.cpp"
@@ -35,9 +37,14 @@ set(DBPRO_ANIMATION_SRCS
   "${SDK_DIR}/Shared/Core/globstruct.h"
 )
 add_library(DBProAnimation ${DBPRO_ANIMATION_SRCS})
-target_include_directories(DBProAnimation PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProAnimation DB3 NVAPI winmm.lib
+ DirectShowBaseClasses
+ strmiids.lib
+ d3dx9.lib
+)
+target_link_directories(DBProAnimation PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProAnimation PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_BASIC2D_SRCS
   "${SDK_DIR}/Shared/Basic2D/CBasic2DC.cpp"
@@ -47,9 +54,11 @@ set(DBPRO_BASIC2D_SRCS
   "${SDK_DIR}/Shared/Core/globstruct.h"
 )
 add_library(DBProBasic2D ${DBPRO_BASIC2D_SRCS})
-target_include_directories(DBProBasic2D PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProBasic2D DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProBasic2D PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProBasic2D PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_BITMAP_SRCS
   "${SDK_DIR}/Shared/Core/SteamCheckForWorkshop.cpp"
@@ -62,164 +71,11 @@ set(DBPRO_BITMAP_SRCS
   "${SDK_DIR}/DarkSDK/Bitmap/resource.h"
 )
 add_library(DBProBitmap ${DBPRO_BITMAP_SRCS})
-target_include_directories(DBProBitmap PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
-
-set(DBPRO_BULLET_SRCS
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btAxisSweep3.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btBroadphaseProxy.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btDbvt.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btDbvtBroadphase.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btDispatcher.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btMultiSapBroadphase.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btOverlappingPairCache.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btQuantizedBvh.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/BroadphaseCollision/btSimpleBroadphase.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btBox2dBox2dCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btBoxBoxCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btBoxBoxDetector.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionDispatcher.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionObject.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCollisionWorld.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btCompoundCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btConvex2dConvex2dAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btConvexConcaveCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btConvexConvexAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btConvexPlaneCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btEmptyCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btGhostObject.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btInternalEdgeUtility.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btManifoldResult.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btSimulationIslandManager.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btSphereBoxCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btSphereSphereCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btSphereTriangleCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/btUnionFind.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionDispatch/SphereTriangleDetector.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btBox2dShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btBoxShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btCapsuleShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btCollisionShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btCompoundShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConcaveShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConeShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvex2dShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexHullShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexInternalShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexPointCloudShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexPolyhedron.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btConvexTriangleMeshShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btCylinderShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btEmptyShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btHeightfieldTerrainShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btMinkowskiSumShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btMultimaterialTriangleMeshShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btMultiSphereShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btOptimizedBvh.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btPolyhedralConvexShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btScaledBvhTriangleMeshShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btShapeHull.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btSphereShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btStaticPlaneShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btStridingMeshInterface.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTetrahedronShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleBuffer.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleCallback.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleIndexVertexArray.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleIndexVertexMaterialArray.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleMesh.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btTriangleMeshShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/CollisionShapes/btUniformScalingShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/Gimpact/btContactProcessing.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/Gimpact/btGenericPoolAllocator.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/Gimpact/btGImpactBvh.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/Gimpact/btGImpactCollisionAlgorithm.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/Gimpact/btGImpactQuantizedBvh.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/Gimpact/btGImpactShape.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/Gimpact/btTriangleShapeEx.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/Gimpact/gim_box_set.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/Gimpact/gim_contact.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/Gimpact/gim_memory.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/Gimpact/gim_tri_collision.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btContinuousConvexCollision.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btConvexCast.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btGjkConvexCast.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btGjkEpa2.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btGjkEpaPenetrationDepthSolver.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btGjkPairDetector.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btMinkowskiPenetrationDepthSolver.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btPersistentManifold.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btPolyhedralContactClipping.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btRaycastCallback.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btSubSimplexConvexCast.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletCollision/NarrowPhaseCollision/btVoronoiSimplexSolver.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/Character/btKinematicCharacterController.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btConeTwistConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btContactConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btFixedConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btGearConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btGeneric6DofConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btHinge2Constraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btHingeConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btPoint2PointConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btSliderConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btSolve2LinearConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btTypedConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/ConstraintSolver/btUniversalConstraint.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/Dynamics/btRigidBody.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/Dynamics/btSimpleDynamicsWorld.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/Dynamics/Bullet-C-API.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/Vehicle/btRaycastVehicle.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/BulletDynamics/Vehicle/btWheelInfo.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/LinearMath/btAlignedAllocator.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/LinearMath/btConvexHull.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/LinearMath/btConvexHullComputer.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/LinearMath/btGeometryUtil.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/LinearMath/btPolarDecomposition.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/LinearMath/btQuickprof.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/LinearMath/btSerializer.cpp"
-  "${SDK_DIR}/../../SDK/BULLET/bullet-2.81-rev2613/src/LinearMath/btVector3.cpp"
-  "${SDK_DIR}/Shared/Bullet/BulletPhysics.CPP"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/BaseItem.cpp"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/BaseItemManager.cpp"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/BT2DX.cpp"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProJoint.cpp"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProJointManager.cpp"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProJoints.cpp"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProMotionState.cpp"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProRagDoll.cpp"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProRagDollBone.cpp"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProRagdollManager.cpp"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProToBullet.cpp"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBPro/include/DBPro.cpp"
-  "${SDK_DIR}/Shared/Bullet/BulletPhysics.H"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/BaseItem.h"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/BaseItemManager.h"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/BT2DX.h"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProJoint.h"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProJointManager.h"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProJoints.h"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProMotionState.h"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProRagDoll.h"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProRagDollBone.h"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProRagdollManager.h"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBProToBullet.h"
-  "${SDK_DIR}/Shared/Bullet/Ragdoll/DBPro/include/DBPro.hpp"
-  "${SDK_DIR}/DarkSDK/Bullet/resource.h"
+target_link_libraries(DBProBitmap DB3 NVAPI winmm.lib
 )
-add_library(DBProBullet ${DBPRO_BULLET_SRCS})
-target_include_directories(DBProBullet PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_directories(DBProBitmap PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProBitmap PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_CAMERA_SRCS
   "${SDK_DIR}/Shared/Camera/CCameraC.cpp"
@@ -241,9 +97,11 @@ set(DBPRO_CAMERA_SRCS
   "${SDK_DIR}/DarkSDK/Camera/resource.h"
 )
 add_library(DBProCamera ${DBPRO_CAMERA_SRCS})
-target_include_directories(DBProCamera PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProCamera DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProCamera PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProCamera PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_CONV3DS_SRCS
   "${SDK_DIR}/SHARED/DBOFORMAT/DBOBlock.cpp"
@@ -275,9 +133,11 @@ set(DBPRO_CONV3DS_SRCS
   "${SDK_DIR}/Shared/Conv3DS/d3dmath.h"
 )
 add_library(DBProConv3DS ${DBPRO_CONV3DS_SRCS})
-target_include_directories(DBProConv3DS PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProConv3DS DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProConv3DS PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProConv3DS PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_CONVMD2_SRCS
   "${SDK_DIR}/Shared/DBOFormat/DBOBlock.cpp"
@@ -307,9 +167,11 @@ set(DBPRO_CONVMD2_SRCS
   "${SDK_DIR}/Shared/ConvMD2/ConvMD2.h"
 )
 add_library(DBProConvMD2 ${DBPRO_CONVMD2_SRCS})
-target_include_directories(DBProConvMD2 PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProConvMD2 DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProConvMD2 PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProConvMD2 PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_CONVMD3_SRCS
   "${SDK_DIR}/Shared/DBOFormat/DBOBlock.cpp"
@@ -341,9 +203,11 @@ set(DBPRO_CONVMD3_SRCS
   "${SDK_DIR}/Shared/ConvMD3/ConvMD3.h"
 )
 add_library(DBProConvMD3 ${DBPRO_CONVMD3_SRCS})
-target_include_directories(DBProConvMD3 PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProConvMD3 DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProConvMD3 PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProConvMD3 PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_CONVMDL_SRCS
   "${SDK_DIR}/Shared/DBOFormat/DBOBlock.cpp"
@@ -373,9 +237,11 @@ set(DBPRO_CONVMDL_SRCS
   "${SDK_DIR}/Shared/ConvMDL/ConvMDL.h"
 )
 add_library(DBProConvMDL ${DBPRO_CONVMDL_SRCS})
-target_include_directories(DBProConvMDL PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProConvMDL DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProConvMDL PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProConvMDL PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_CONVX_SRCS
   "${SDK_DIR}/Shared/ConvX/ConvX.cpp"
@@ -407,9 +273,11 @@ set(DBPRO_CONVX_SRCS
   "${SDK_DIR}/Shared/Core/globstruct.h"
 )
 add_library(DBProConvX ${DBPRO_CONVX_SRCS})
-target_include_directories(DBProConvX PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProConvX DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProConvX PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProConvX PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_DBDLLCORE_SRCS
   "${SDK_DIR}/Shared/Core/DBDLLCore.cpp"
@@ -440,9 +308,11 @@ set(DBPRO_DBDLLCORE_SRCS
   "${SDK_DIR}/Shared/Error/CRuntimeErrors.h"
 )
 add_library(DBProDBDLLCore ${DBPRO_DBDLLCORE_SRCS})
-target_include_directories(DBProDBDLLCore PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProDBDLLCore DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProDBDLLCore PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProDBDLLCore PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_CUSTOMBSP_SRCS
   "${SDK_DIR}/Shared/Error/CError.cpp"
@@ -457,9 +327,11 @@ set(DBPRO_CUSTOMBSP_SRCS
   "${SDK_DIR}/Shared/CustomBSP/Collision.h"
 )
 add_library(DBProCustomBSP ${DBPRO_CUSTOMBSP_SRCS})
-target_include_directories(DBProCustomBSP PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProCustomBSP DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProCustomBSP PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProCustomBSP PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_FILE_SRCS
   "${SDK_DIR}/Shared/Core/SteamCheckForWorkshop.cpp"
@@ -473,9 +345,11 @@ set(DBPRO_FILE_SRCS
   "${SDK_DIR}/DarkSDK/File/resource.h"
 )
 add_library(DBProFile ${DBPRO_FILE_SRCS})
-target_include_directories(DBProFile PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProFile DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProFile PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProFile PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_FTP_SRCS
   "${SDK_DIR}/Shared/FTP/CFTPC.cpp"
@@ -491,9 +365,11 @@ set(DBPRO_FTP_SRCS
   "${SDK_DIR}/DarkSDK/FTP/resource.h"
 )
 add_library(DBProFTP ${DBPRO_FTP_SRCS})
-target_include_directories(DBProFTP PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProFTP DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProFTP PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProFTP PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_IMAGE_SRCS
   "${SDK_DIR}/Shared/Core/SteamCheckForWorkshop.cpp"
@@ -513,9 +389,11 @@ set(DBPRO_IMAGE_SRCS
   "${SDK_DIR}/DarkSDK/Image/resource.h"
 )
 add_library(DBProImage ${DBPRO_IMAGE_SRCS})
-target_include_directories(DBProImage PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProImage DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProImage PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProImage PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_INPUT_SRCS
   "${SDK_DIR}/Shared/Input/CInputC.cpp"
@@ -529,9 +407,12 @@ set(DBPRO_INPUT_SRCS
   "${SDK_DIR}/DarkSDK/Input/resource.h"
 )
 add_library(DBProInput ${DBPRO_INPUT_SRCS})
-target_include_directories(DBProInput PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProInput DB3 NVAPI winmm.lib
+ dxguid.lib
+)
+target_link_directories(DBProInput PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProInput PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_LIGHT_SRCS
   "${SDK_DIR}/Shared/Light/CLightC.cpp"
@@ -545,9 +426,11 @@ set(DBPRO_LIGHT_SRCS
   "${SDK_DIR}/DarkSDK/Light/resource.h"
 )
 add_library(DBProLight ${DBPRO_LIGHT_SRCS})
-target_include_directories(DBProLight PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProLight DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProLight PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProLight PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_MATRIX_SRCS
   "${SDK_DIR}/Shared/Matrix/CMatrixC.cpp"
@@ -564,9 +447,11 @@ set(DBPRO_MATRIX_SRCS
   "${SDK_DIR}/Shared/Error/CError.h"
 )
 add_library(DBProMatrix ${DBPRO_MATRIX_SRCS})
-target_include_directories(DBProMatrix PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProMatrix DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProMatrix PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProMatrix PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_MEMBLOCKS_SRCS
   "${SDK_DIR}/DarkSDK/Memblocks/DLLMain.cpp"
@@ -577,40 +462,11 @@ set(DBPRO_MEMBLOCKS_SRCS
   "${SDK_DIR}/Shared/Error/CRuntimeErrors.h"
 )
 add_library(DBProMemblocks ${DBPRO_MEMBLOCKS_SRCS})
-target_include_directories(DBProMemblocks PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
-
-set(DBPRO_MULTIPLAYER_SRCS
-  "${SDK_DIR}/DarkSDK/Multiplayer/DLLMain.cpp"
-  "${SDK_DIR}/Shared/Core/globstruct.cpp"
-  "${SDK_DIR}/Shared/Multiplayer/CMultiplayerC.cpp"
-  "${SDK_DIR}/Shared/Multiplayer/Network/CNetwork.cpp"
-  "${SDK_DIR}/Shared/Multiplayer/Network/NetQueue.cpp"
-  "${SDK_DIR}/Shared/Error/CError.cpp"
-  "${SDK_DIR}/Shared/Multiplayer/CMultiplayerC.h"
-  "${SDK_DIR}/Shared/Multiplayer/Network/CNetwork.h"
-  "${SDK_DIR}/SHARED/Multiplayer/Common.h"
-  "${SDK_DIR}/Shared/Multiplayer/Network/NetQueue.h"
-  "${SDK_DIR}/Shared/Error/CError.h"
-  "${SDK_DIR}/Shared/Error/CRuntimeErrors.h"
+target_link_libraries(DBProMemblocks DB3 NVAPI winmm.lib
 )
-add_library(DBProMultiplayer ${DBPRO_MULTIPLAYER_SRCS})
-target_include_directories(DBProMultiplayer PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
-
-set(DBPRO_MULTIPLAYERPLUS_SRCS
-  "${SDK_DIR}/SHARED/Error/CError.cpp"
-  "${SDK_DIR}/SHARED/MultiplayerPlus/Multiplayer.cpp"
-  "${SDK_DIR}/SHARED/Error/CError.h"
-  "${SDK_DIR}/SHARED/Error/CRuntimeErrors.h"
-  "${SDK_DIR}/SHARED/MultiplayerPlus/Multiplayer.h"
+target_link_directories(DBProMemblocks PRIVATE ${DirectX_LIBRARY_PATHS}
 )
-add_library(DBProMultiplayerPlus ${DBPRO_MULTIPLAYERPLUS_SRCS})
-target_include_directories(DBProMultiplayerPlus PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_include_directories(DBProMemblocks PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_MUSIC_SRCS
   "${SDK_DIR}/Shared/Core/SteamCheckForWorkshop.cpp"
@@ -631,9 +487,12 @@ set(DBPRO_MUSIC_SRCS
   "${SDK_DIR}/Shared/Error/CError.h"
 )
 add_library(DBProMusic ${DBPRO_MUSIC_SRCS})
-target_include_directories(DBProMusic PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProMusic DB3 NVAPI winmm.lib
+ strmiids.lib
+)
+target_link_directories(DBProMusic PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProMusic PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_OBJECTS_SRCS
   "${SDK_DIR}/Shared/Core/SteamCheckForWorkshop.cpp"
@@ -725,9 +584,11 @@ set(DBPRO_OBJECTS_SRCS
   "${SDK_DIR}/DarkSDK/Objects/resource.h"
 )
 add_library(DBProObjects ${DBPRO_OBJECTS_SRCS})
-target_include_directories(DBProObjects PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProObjects DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProObjects PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProObjects PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_PARTICLES_SRCS
   "${SDK_DIR}/Shared/SpecialEffects/CParticleC.cpp"
@@ -750,9 +611,11 @@ set(DBPRO_PARTICLES_SRCS
   "${SDK_DIR}/DarkSDK/Particles/resource.h"
 )
 add_library(DBProParticles ${DBPRO_PARTICLES_SRCS})
-target_include_directories(DBProParticles PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProParticles DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProParticles PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProParticles PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_Q2BSP_SRCS
   "${SDK_DIR}/Shared/Q2BSP/Collision.cpp"
@@ -771,9 +634,11 @@ set(DBPRO_Q2BSP_SRCS
   "${SDK_DIR}/Shared/Error/CError.h"
 )
 add_library(DBProQ2BSP ${DBPRO_Q2BSP_SRCS})
-target_include_directories(DBProQ2BSP PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProQ2BSP DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProQ2BSP PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProQ2BSP PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_Q3BSP_SRCS
   "${SDK_DIR}/Shared/Q3BSP/CBSPFile.cpp"
@@ -802,9 +667,11 @@ set(DBPRO_Q3BSP_SRCS
   "${SDK_DIR}/Shared/Core/globstruct.h"
 )
 add_library(DBProQ3BSP ${DBPRO_Q3BSP_SRCS})
-target_include_directories(DBProQ3BSP PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProQ3BSP DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProQ3BSP PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProQ3BSP PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_SETUP_SRCS
   "${SDK_DIR}/Shared/Error/CError.cpp"
@@ -818,42 +685,12 @@ set(DBPRO_SETUP_SRCS
   "${SDK_DIR}/DarkSDK/Setup/resource.h"
 )
 add_library(DBProSetup ${DBPRO_SETUP_SRCS})
-target_include_directories(DBProSetup PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
-
-set(DBPRO_SOUND_SRCS
-  "${SDK_DIR}/Shared/Core/SteamCheckForWorkshop.cpp"
-  "${SDK_DIR}/Shared/Sound/ADPCMtoWAV.cpp"
-  "${SDK_DIR}/Shared/Sound/CSoundC.cpp"
-  "${SDK_DIR}/Shared/Sound/CSoundManagerC.cpp"
-  "${SDK_DIR}/Shared/Sound/dsutil.cpp"
-  "${SDK_DIR}/Shared/Sound/dxutil.cpp"
-  "${SDK_DIR}/Shared/Error/CError.cpp"
-  "${SDK_DIR}/Shared/Data/CDataC.cpp"
-  "${SDK_DIR}/SHARED/Sound/OggVorbis.cpp"
-  "${SDK_DIR}/SHARED/Sound/OggVorbisEncoderAudio.cpp"
-  "${SDK_DIR}/SHARED/Sound/OggVorbisEncoderEncode.cpp"
-  "${SDK_DIR}/SHARED/Sound/OggVorbisEncoderMain.cpp"
-  "${SDK_DIR}/SHARED/Sound/OggVorbisEncoderPlatform.cpp"
-  "${SDK_DIR}/DarkSDK/Sound/DLLMain.cpp"
-  "${SDK_DIR}/Shared/Sound/ADPCMtoWAV.h"
-  "${SDK_DIR}/Shared/Sound/CSoundC.h"
-  "${SDK_DIR}/Shared/Sound/CSoundDataC.h"
-  "${SDK_DIR}/Shared/Sound/CSoundManagerC.h"
-  "${SDK_DIR}/Shared/Sound/dsutil.h"
-  "${SDK_DIR}/Shared/Sound/dxutil.h"
-  "${SDK_DIR}/Shared/Error/CError.h"
-  "${SDK_DIR}/Shared/Error/CRuntimeErrors.h"
-  "${SDK_DIR}/SHARED/Sound/OggVorbisEncoderAudio.h"
-  "${SDK_DIR}/SHARED/Sound/OggVorbisEncoderEncode.h"
-  "${SDK_DIR}/SHARED/Sound/OggVorbisEncoderPlatform.h"
-  "${SDK_DIR}/DarkSDK/Sound/resource.h"
+target_link_libraries(DBProSetup DB3 NVAPI winmm.lib
+ dxguid.lib
 )
-add_library(DBProSound ${DBPRO_SOUND_SRCS})
-target_include_directories(DBProSound PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_directories(DBProSetup PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProSetup PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_SPRITES_SRCS
   "${SDK_DIR}/Shared/Core/SteamCheckForWorkshop.cpp"
@@ -870,9 +707,11 @@ set(DBPRO_SPRITES_SRCS
   "${SDK_DIR}/DarkSDK/Sprites/resource.h"
 )
 add_library(DBProSprites ${DBPRO_SPRITES_SRCS})
-target_include_directories(DBProSprites PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProSprites DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProSprites PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProSprites PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_SYSTEM_SRCS
   "${SDK_DIR}/DarkSDK/System/DLLMain.cpp"
@@ -888,9 +727,11 @@ set(DBPRO_SYSTEM_SRCS
   "${SDK_DIR}/DarkSDK/System/resource.h"
 )
 add_library(DBProSystem ${DBPRO_SYSTEM_SRCS})
-target_include_directories(DBProSystem PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProSystem DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProSystem PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProSystem PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_TEXT_SRCS
   "${SDK_DIR}/Shared/Text/CTextC.cpp"
@@ -902,9 +743,11 @@ set(DBPRO_TEXT_SRCS
   "${SDK_DIR}/Shared/Position/CPositionC.h"
 )
 add_library(DBProText ${DBPRO_TEXT_SRCS})
-target_include_directories(DBProText PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProText DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProText PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProText PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_TRANSFORMS_SRCS
   "${SDK_DIR}/Shared/Transforms/OptimizedMath.cpp"
@@ -916,9 +759,11 @@ set(DBPRO_TRANSFORMS_SRCS
   "${SDK_DIR}/Shared/Transforms/TransformsAPI.h"
 )
 add_library(DBProTransforms ${DBPRO_TRANSFORMS_SRCS})
-target_include_directories(DBProTransforms PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProTransforms DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProTransforms PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProTransforms PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_VECTORS_SRCS
   "${SDK_DIR}/Shared/Vectors/cVectorC.cpp"
@@ -931,19 +776,11 @@ set(DBPRO_VECTORS_SRCS
   "${SDK_DIR}/Shared/Error/CRuntimeErrors.h"
 )
 add_library(DBProVectors ${DBPRO_VECTORS_SRCS})
-target_include_directories(DBProVectors PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
-
-set(DBPRO_GAMEFX-VS2010_SRCS
-  "${SDK_DIR}/Shared/GameFX/GameFX.cpp"
-  "${SDK_DIR}/Shared/GameFX/GameFX.h"
-  "${SDK_DIR}/DarkSDKMore/GameFX/resource.h"
+target_link_libraries(DBProVectors DB3 NVAPI winmm.lib
 )
-add_library(DBProGameFX-vs2010 ${DBPRO_GAMEFX-VS2010_SRCS})
-target_include_directories(DBProGameFX-vs2010 PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_directories(DBProVectors PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProVectors PRIVATE ${DirectX_INCLUDE_DIRS})
 
 set(DBPRO_GAMEFX_SRCS
   "${SDK_DIR}/Shared/GameFX/GameFX.cpp"
@@ -951,7 +788,42 @@ set(DBPRO_GAMEFX_SRCS
   "${SDK_DIR}/DarkSDKMore/GameFX/resource.h"
 )
 add_library(DBProGameFX ${DBPRO_GAMEFX_SRCS})
-target_include_directories(DBProGameFX PRIVATE
-    "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)/Include"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDK/BaseClasses")
+target_link_libraries(DBProGameFX DB3 NVAPI winmm.lib
+)
+target_link_directories(DBProGameFX PRIVATE ${DirectX_LIBRARY_PATHS}
+)
+target_include_directories(DBProGameFX PRIVATE ${DirectX_INCLUDE_DIRS})
 
+add_library(DBPro SHARED
+  $<TARGET_OBJECTS:DBProAdvancedMatrix>
+  $<TARGET_OBJECTS:DBProAnimation>
+  $<TARGET_OBJECTS:DBProBasic2D>
+  $<TARGET_OBJECTS:DBProBitmap>
+  $<TARGET_OBJECTS:DBProCamera>
+  $<TARGET_OBJECTS:DBProConv3DS>
+  $<TARGET_OBJECTS:DBProConvMD2>
+  $<TARGET_OBJECTS:DBProConvMD3>
+  $<TARGET_OBJECTS:DBProConvMDL>
+  $<TARGET_OBJECTS:DBProConvX>
+  $<TARGET_OBJECTS:DBProDBDLLCore>
+  $<TARGET_OBJECTS:DBProCustomBSP>
+  $<TARGET_OBJECTS:DBProFile>
+  $<TARGET_OBJECTS:DBProFTP>
+  $<TARGET_OBJECTS:DBProImage>
+  $<TARGET_OBJECTS:DBProInput>
+  $<TARGET_OBJECTS:DBProLight>
+  $<TARGET_OBJECTS:DBProMatrix>
+  $<TARGET_OBJECTS:DBProMemblocks>
+  $<TARGET_OBJECTS:DBProMusic>
+  $<TARGET_OBJECTS:DBProObjects>
+  $<TARGET_OBJECTS:DBProParticles>
+  $<TARGET_OBJECTS:DBProQ2BSP>
+  $<TARGET_OBJECTS:DBProQ3BSP>
+  $<TARGET_OBJECTS:DBProSetup>
+  $<TARGET_OBJECTS:DBProSprites>
+  $<TARGET_OBJECTS:DBProSystem>
+  $<TARGET_OBJECTS:DBProText>
+  $<TARGET_OBJECTS:DBProTransforms>
+  $<TARGET_OBJECTS:DBProVectors>
+  $<TARGET_OBJECTS:DBProGameFX>
+)

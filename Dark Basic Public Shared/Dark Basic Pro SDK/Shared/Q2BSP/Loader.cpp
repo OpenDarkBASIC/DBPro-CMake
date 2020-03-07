@@ -34,7 +34,7 @@ BOOL file_loader::GetRelativePath ( LPSTR fullpath, LPSTR start, LPSTR* out )
 	if ( fullpath [ strlen ( fullpath ) - 1 ] == '/' )
 		fullpath [ strlen ( fullpath ) - 1 ] = '\0';
 
-	for ( x = 0; x != ( int ) strlen ( start ); x++ )
+	for ( int x = 0; x != ( int ) strlen ( start ); x++ )
 	{
 		if ( start [ x ] == '\\' )
 			start [ x ] = '/';
@@ -51,6 +51,7 @@ BOOL file_loader::GetRelativePath ( LPSTR fullpath, LPSTR start, LPSTR* out )
 		return TRUE;
 	}
 
+	int x;
 	for ( x = 0; x != ( int ) strlen ( start ); x++ )
 	{
 		if ( start [ x ] != fullpath [ x ] )

@@ -15,7 +15,7 @@ BOOL _Textures::Reset ( )
 		SAFE_DELETE_ARRAY ( Tex [ i ].FileName );
 	}
 
-	for ( i = 0; i < LightMap_size; i++ )
+	for ( int i = 0; i < LightMap_size; i++ )
 	{
 		SAFE_DELETE_ARRAY ( LightMap [ i ].FileName );
 	}
@@ -64,7 +64,8 @@ int _Textures::Load_By_FileName ( LPSTR FileName, BOOL forceload )
 	byte* data = NULL; 
 	int length;
 
-	for ( int x = 0; x < Textures.cache.entry_count; x++ )
+	int x;
+	for ( x = 0; x < Textures.cache.entry_count; x++ )
 	{
 		if ( _stricmp ( Textures.cache.entry [ x ].filename, FileName ) == 0 )
 		{
@@ -163,7 +164,7 @@ int _Textures::Get_ID_For_FileName ( LPSTR FileName, BOOL forceload )
 	if ( forceload )
 		return -2;
 		
-	for ( x = 0; x < Textures.NotFound_count; x++ )
+	for ( int x = 0; x < Textures.NotFound_count; x++ )
 	{
 		if ( _stricmp ( Textures.NotFound_FileName [ x ], FileName ) == 0 )
 			return -1;
@@ -258,7 +259,7 @@ TexOptions _Textures::GetTexOptions ( LPSTR FileName )
 
 		strcpy ( temp2, option_cache.FileName [ x ] );
 
-		for ( y = 0; y < (int)strlen ( temp2 ); y++ )
+		for ( int y = 0; y < (int)strlen ( temp2 ); y++ )
 		{
 			if ( temp2 [ y ] == '/' )
 				temp2 [ y ] = '\\';
@@ -853,7 +854,8 @@ int _Textures::Load_By_FileName_Q3A ( LPSTR FileName, BOOL forceload )
 	char newname [ 256 ];
 	strcpy ( newname, FileName );
 
-	for ( int x = 0; x < Q3A_Resources.num_files; x++ )
+	int x;
+	for ( x = 0; x < Q3A_Resources.num_files; x++ )
 	{
 		char name [ 256 ];
 		strcpy ( name, FileName );
@@ -963,7 +965,7 @@ int _Textures::Get_ID_For_FileNameQ3A ( LPSTR FileName, BOOL forceload )
 	if ( forceload )
 		return -2;
 	
-	for ( x = 0; x < Textures.NotFound_count; x++ )
+	for ( int x = 0; x < Textures.NotFound_count; x++ )
 	{
 		char name [ 256 ];
 		strcpy ( name, FileName );

@@ -159,7 +159,7 @@ LPICONRESOURCE ReadIconFromICOFile( LPCTSTR szFileName )
         return NULL;
     }
     // Allocate memory for the resource structure
-    if( (lpIR = malloc( sizeof(ICONRESOURCE) )) == NULL )
+    if( (lpIR = (LPICONRESOURCE)malloc( sizeof(ICONRESOURCE) )) == NULL )
     {
         MessageBox( NULL, "Error Allocating Memory", szFileName, MB_OK );
         CloseHandle( hFile );
@@ -174,7 +174,7 @@ LPICONRESOURCE ReadIconFromICOFile( LPCTSTR szFileName )
         return NULL;
     }
     // Adjust the size of the struct to account for the images
-    if( (lpNew = realloc( lpIR, sizeof(ICONRESOURCE) + ((lpIR->nNumImages-1) * sizeof(ICONIMAGE)) )) == NULL )
+    if( (lpNew = (LPICONRESOURCE)realloc( lpIR, sizeof(ICONRESOURCE) + ((lpIR->nNumImages-1) * sizeof(ICONIMAGE)) )) == NULL )
     {
         MessageBox( NULL, "Error Allocating Memory", szFileName, MB_OK );
         CloseHandle( hFile );
@@ -186,7 +186,7 @@ LPICONRESOURCE ReadIconFromICOFile( LPCTSTR szFileName )
     lstrcpy( lpIR->szOriginalICOFileName, szFileName );
     lstrcpy( lpIR->szOriginalDLLFileName, "" );
     // Allocate enough memory for the icon directory entries
-    if( (lpIDE = malloc( lpIR->nNumImages * sizeof( ICONDIRENTRY ) ) ) == NULL )
+    if( (lpIDE = (LPICONDIRENTRY)malloc( lpIR->nNumImages * sizeof( ICONDIRENTRY ) ) ) == NULL )
     {
         MessageBox( NULL, "Error Allocating Memory", szFileName, MB_OK );
         CloseHandle( hFile );
@@ -212,7 +212,7 @@ LPICONRESOURCE ReadIconFromICOFile( LPCTSTR szFileName )
     for( i = 0; i < lpIR->nNumImages; i++ )
     {
         // Allocate memory for the resource
-        if( (lpIR->IconImages[i].lpBits = malloc(lpIDE[i].dwBytesInRes)) == NULL )
+        if( (lpIR->IconImages[i].lpBits = (LPBYTE)malloc(lpIDE[i].dwBytesInRes)) == NULL )
         {
             MessageBox( NULL, "Error Allocating Memory", szFileName, MB_OK );
             CloseHandle( hFile );
@@ -296,7 +296,7 @@ BOOL AdjustIconImagePointers( LPICONIMAGE lpImage )
     // How many colors?
     lpImage->Colors = lpImage->lpbi->bmiHeader.biPlanes * lpImage->lpbi->bmiHeader.biBitCount;
     // XOR bits follow the header and color table
-    lpImage->lpXOR = FindDIBBits((LPSTR)lpImage->lpbi);
+    lpImage->lpXOR = (LPBYTE)FindDIBBits((LPSTR)lpImage->lpbi);
     // AND bits follow the XOR bits
     lpImage->lpAND = lpImage->lpXOR + (lpImage->Height*BytesPerLine((LPBITMAPINFOHEADER)(lpImage->lpbi)));
     return TRUE;
@@ -374,7 +374,7 @@ UINT ReadICOHeader( HANDLE hFile )
 *                July '95 - Created
 *
 \****************************************************************************/
-BOOL CALLBACK MyEnumProcedure( HANDLE  hModule, LPCTSTR  lpszType, LPTSTR  lpszName, LONG  lParam )	
+BOOL CALLBACK MyEnumProcedure(HMODULE  hModule, LPCTSTR  lpszType, LPTSTR  lpszName, LONG_PTR  lParam )
 {
     TCHAR	szBuffer[256];
     LONG    nIndex = LB_ERR;
@@ -434,7 +434,7 @@ HICON GetIconFromInstance( HINSTANCE hInstance, LPTSTR nIndex )
         return NULL;
 
     // Find this particular image
-    nID = LookupIconIdFromDirectory( lpRes, TRUE );
+    nID = LookupIconIdFromDirectory( (PBYTE)lpRes, TRUE );
     if( (hRsrc = FindResource( hInstance, MAKEINTRESOURCE(nID), RT_ICON )) == NULL )
         return NULL;
     if( (hGlobal = LoadResource( hInstance, hRsrc )) == NULL )
@@ -442,7 +442,7 @@ HICON GetIconFromInstance( HINSTANCE hInstance, LPTSTR nIndex )
     if( (lpRes = LockResource(hGlobal)) == NULL )
         return NULL;
     // Let the OS make us an icon
-    hIcon = CreateIconFromResource( lpRes, SizeofResource(hInstance,hRsrc), TRUE, 0x00030000 );
+    hIcon = CreateIconFromResource((PBYTE)lpRes, SizeofResource(hInstance,hRsrc), TRUE, 0x00030000 );
     return hIcon;
 }
 /* End GetIconFromInstance() ***********************************************/
@@ -687,13 +687,13 @@ LPICONRESOURCE ReadIconFromEXEFile( LPCTSTR szFileName )
             FreeLibrary( hLibrary );
             return NULL;
         }
-        if( (lpIcon = LockResource(hGlobal)) == NULL )
+        if( (lpIcon = (LPMEMICONDIR)LockResource(hGlobal)) == NULL )
         {
             FreeLibrary( hLibrary );
             return NULL;
         }
         // Allocate enough memory for the images
-        if( (lpIR = malloc( sizeof(ICONRESOURCE) + ((lpIcon->idCount-1) * sizeof(ICONIMAGE)) )) == NULL )
+        if( (lpIR = (LPICONRESOURCE)malloc( sizeof(ICONRESOURCE) + ((lpIcon->idCount-1) * sizeof(ICONIMAGE)) )) == NULL )
         {
             MessageBox( NULL, "Error Allocating Memory", szFileName, MB_OK );
             FreeLibrary( hLibrary );
@@ -721,7 +721,7 @@ LPICONRESOURCE ReadIconFromEXEFile( LPCTSTR szFileName )
             }
             // Store a copy of the resource locally
             lpIR->IconImages[i].dwNumBytes = SizeofResource( hLibrary, hRsrc );
-            lpIR->IconImages[i].lpBits = malloc( lpIR->IconImages[i].dwNumBytes );
+            lpIR->IconImages[i].lpBits = (LPBYTE)malloc( lpIR->IconImages[i].dwNumBytes );
             memcpy( lpIR->IconImages[i].lpBits, LockResource( hGlobal ), lpIR->IconImages[i].dwNumBytes );
             // Adjust internal pointers
             if( ! AdjustIconImagePointers( &(lpIR->IconImages[i]) ) )
@@ -928,7 +928,7 @@ BOOL IconImageToClipBoard( LPICONIMAGE lpii )
         {
             // Make a buffer to send to clipboard
             hGlobal = GlobalAlloc( GMEM_MOVEABLE | GMEM_DDESHARE, lpii->dwNumBytes );
-            lpBits = GlobalLock( hGlobal );
+            lpBits = (LPSTR)GlobalLock( hGlobal );
             // Copy the bits to the buffer
             memcpy( lpBits, lpii->lpBits, lpii->dwNumBytes );
             // Adjust for funky height*2 thing
@@ -975,7 +975,7 @@ BOOL IconImageFromClipBoard( LPICONIMAGE lpii, BOOL bStretchToFit )
         if( (hClipGlobal = GetClipboardData( CF_DIB )) != NULL )
         {
             // Lock it down
-            if( (lpbi=GlobalLock(hClipGlobal)) != NULL )
+            if( (lpbi=(LPBITMAPINFO)GlobalLock(hClipGlobal)) != NULL )
             {
                 // Convert it to an icon image
                 bRet = DIBToIconImage( lpii, (LPBYTE)lpbi, bStretchToFit );
@@ -1031,7 +1031,7 @@ BOOL DIBToIconImage( LPICONIMAGE lpii, LPBYTE lpDIB, BOOL bStretch )
     if( lpii->lpBits != NULL )
         free( lpii->lpBits );
     // Allocate enough room for the new image
-    if( (lpii->lpBits = malloc( lpii->dwNumBytes )) == NULL )
+    if( (lpii->lpBits = (LPBYTE)malloc( lpii->dwNumBytes )) == NULL )
     {
         free( lpii );
         return FALSE;
@@ -1041,7 +1041,7 @@ BOOL DIBToIconImage( LPICONIMAGE lpii, LPBYTE lpDIB, BOOL bStretch )
     // Adjust internal pointers/variables for new image
     lpii->lpbi = (LPBITMAPINFO)(lpii->lpBits);
     lpii->lpbi->bmiHeader.biHeight *= 2;
-    lpii->lpXOR = FindDIBBits( (LPSTR)(lpii->lpBits) );
+    lpii->lpXOR = (LPBYTE)FindDIBBits( (LPSTR)(lpii->lpBits) );
     memcpy( lpii->lpXOR, FindDIBBits((LPSTR)lpNewDIB), lpii->Height * BytesPerLine( (LPBITMAPINFOHEADER)lpNewDIB ) );
     lpii->lpAND = lpii->lpXOR + lpii->Height * BytesPerLine( (LPBITMAPINFOHEADER)lpNewDIB );
     memset( lpii->lpAND, 0, lpii->Height * WIDTHBYTES( lpii->Width ) );
@@ -1090,11 +1090,11 @@ BOOL CreateBlankNewFormatIcon( LPICONIMAGE lpii )
     dwFinalSize += lpii->Height * WIDTHBYTES( lpii->Width );
 
     // Allocate some memory for it
-    lpii->lpBits = malloc( dwFinalSize );
+    lpii->lpBits = (LPBYTE)malloc( dwFinalSize );
     ZeroMemory( lpii->lpBits, dwFinalSize );
     lpii->dwNumBytes = dwFinalSize;
     lpii->lpbi = (LPBITMAPINFO)(lpii->lpBits);
-    lpii->lpXOR = (LPSTR)(lpii->lpbi) + sizeof(BITMAPINFOHEADER) + PaletteSize( (LPSTR)&bmih );
+    lpii->lpXOR = (LPBYTE)((LPSTR)(lpii->lpbi) + sizeof(BITMAPINFOHEADER) + PaletteSize( (LPSTR)&bmih ));
     lpii->lpAND = lpii->lpXOR + (lpii->Height * WIDTHBYTES( lpii->Width * lpii->Colors ));
 
     // The bitmap header is zeros, fill it out
@@ -1220,7 +1220,7 @@ BOOL DrawANDMask( HDC hDC, RECT Rect, LPICONIMAGE lpIcon )
         return FALSE;
 
     // Need a bitmap header for the mono mask
-    lpbi = malloc( sizeof(BITMAPINFO) + (2 * sizeof( RGBQUAD )) );
+    lpbi = (LPBITMAPINFO)malloc( sizeof(BITMAPINFO) + (2 * sizeof( RGBQUAD )) );
     lpbi->bmiHeader.biSize = sizeof( BITMAPINFOHEADER );
     lpbi->bmiHeader.biWidth = lpIcon->lpbi->bmiHeader.biWidth;
     lpbi->bmiHeader.biHeight = lpIcon->lpbi->bmiHeader.biHeight/2;
@@ -1293,10 +1293,10 @@ BOOL MakeNewANDMaskBasedOnPoint( LPICONIMAGE lpIcon, POINT pt )
     hDC = GetDC( NULL );
 
     // Use DIBSection for source
-    hXORBitmap = CreateDIBSection( hDC, lpIcon->lpbi, DIB_RGB_COLORS, &pXORBits, NULL, 0  );
+    hXORBitmap = CreateDIBSection( hDC, lpIcon->lpbi, DIB_RGB_COLORS, (void**)&pXORBits, NULL, 0  );
     memcpy( pXORBits, lpIcon->lpXOR, (lpIcon->lpbi->bmiHeader.biHeight) * BytesPerLine((LPBITMAPINFOHEADER)(lpIcon->lpbi)) );
     hMemDC1 = CreateCompatibleDC( hDC );
-    hOldXORBitmap = SelectObject( hMemDC1, hXORBitmap );
+    hOldXORBitmap = (HBITMAP)SelectObject( hMemDC1, hXORBitmap );
 
     // Set the color table if need be
     if( lpIcon->lpbi->bmiHeader.biBitCount <= 8 )

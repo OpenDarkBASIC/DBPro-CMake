@@ -461,7 +461,7 @@ bool Load ( char* szFilename, char* szMap )
 	////////////////
 	file_loader::Find::Files ( "*.wad", path, &ff );
 
-	for ( x = 0; x < ff.num_files; x++ )
+	for ( int x = 0; x < ff.num_files; x++ )
 		file_loader::Q2::Add_WAD ( ff.files [ x ].fullname );
 
 	ff.Release ( );
@@ -470,7 +470,7 @@ bool Load ( char* szFilename, char* szMap )
 	////////////////
 	file_loader::Find::Files ( "*.pak", path, &ff );
 
-	for ( x = 0; x < ff.num_files; x++ )
+	for ( int x = 0; x < ff.num_files; x++ )
 		file_loader::Q2::Add_WAD ( ff.files [ x ].fullname );
 
 	ff.Release ( );
@@ -811,7 +811,7 @@ bool SetupWorld ( byte* data )
 	        // compute lightmap size
 			int size [ 2 ];
 
-			for ( c = 0; c < 2; c++ )
+			for ( int c = 0; c < 2; c++ )
 			{
 	            float tmin = ( float ) floor ( min [ c ] / 16.0f );
 				float tmax = ( float ) ceil  ( max [ c ] / 16.0f );
@@ -864,7 +864,7 @@ bool SetupWorld ( byte* data )
 		face.first = QMAP.v_count;
 		face.count = f.numedges;
 
-		for ( c = 0; c < f.numedges; c++ )
+		for ( int c = 0; c < f.numedges; c++ )
 		{
 	        float v [ 7 ];
 
@@ -941,7 +941,7 @@ bool SetupWorld ( byte* data )
 		CalcNormal2 ( ve, face.count, &n );
 		D3DXVec3Normalize ( &n, &n );
 
-		for ( y = 0; y < face.count; y++ )
+		for ( int y = 0; y < face.count; y++ )
 			QMAP.v [ face.first + y ].n = n;			
 
 		float d = face.plane.dist;

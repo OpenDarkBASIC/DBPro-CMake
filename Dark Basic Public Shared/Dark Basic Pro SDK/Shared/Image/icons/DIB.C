@@ -180,7 +180,7 @@ LPBYTE ConvertDIBFormat( LPBITMAPINFO lpSrcDIB, UINT nWidth, UINT nHeight, UINT 
     // Allocate and fill out a BITMAPINFO struct for the new DIB
     // Allow enough room for a 256-entry color table, just in case
     dwTargetHeaderSize = sizeof( BITMAPINFO ) + ( 256 * sizeof( RGBQUAD ) );
-    lpbmi = malloc( dwTargetHeaderSize );
+    lpbmi = (LPBITMAPINFO)malloc( dwTargetHeaderSize );
     lpbmi->bmiHeader.biSize = sizeof( BITMAPINFOHEADER );
     lpbmi->bmiHeader.biWidth = nWidth;
     lpbmi->bmiHeader.biHeight = nHeight;
@@ -201,8 +201,8 @@ LPBYTE ConvertDIBFormat( LPBITMAPINFO lpSrcDIB, UINT nWidth, UINT nHeight, UINT 
 
     // Gonna use DIBSections and BitBlt() to do the conversion, so make 'em
     hDC = GetDC( NULL );
-    hTargetBitmap = CreateDIBSection( hDC, lpbmi, DIB_RGB_COLORS, &lpTargetBits, NULL, 0 );
-    hSourceBitmap = CreateDIBSection( hDC, lpSrcDIB, DIB_RGB_COLORS, &lpSourceBits, NULL, 0 );
+    hTargetBitmap = CreateDIBSection( hDC, lpbmi, DIB_RGB_COLORS, (void**)&lpTargetBits, NULL, 0 );
+    hSourceBitmap = CreateDIBSection( hDC, lpSrcDIB, DIB_RGB_COLORS, (void**)&lpSourceBits, NULL, 0 );
     hSourceDC = CreateCompatibleDC( hDC );
     hTargetDC = CreateCompatibleDC( hDC );
 
@@ -212,8 +212,8 @@ LPBYTE ConvertDIBFormat( LPBITMAPINFO lpSrcDIB, UINT nWidth, UINT nHeight, UINT 
     memcpy( lpSourceBits, FindDIBBits((LPSTR)lpSrcDIB), dwSourceBitsSize );
 
     // Select DIBSections into DCs
-    hOldSourceBitmap = SelectObject( hSourceDC, hSourceBitmap );
-    hOldTargetBitmap = SelectObject( hTargetDC, hTargetBitmap );
+    hOldSourceBitmap = (HBITMAP)SelectObject( hSourceDC, hSourceBitmap );
+    hOldTargetBitmap = (HBITMAP)SelectObject( hTargetDC, hTargetBitmap );
 
     // Set the color tables for the DIBSections
     if( lpSrcDIB->bmiHeader.biBitCount <= 8 )
@@ -252,9 +252,9 @@ LPBYTE ConvertDIBFormat( LPBITMAPINFO lpSrcDIB, UINT nWidth, UINT nHeight, UINT 
     GdiFlush();
 
     // Allocate enough memory for the new CF_DIB, and copy bits
-    lpResult = malloc( dwTargetHeaderSize + dwTargetBitsSize );
+    lpResult = (LPBYTE)malloc( dwTargetHeaderSize + dwTargetBitsSize );
     memcpy( lpResult, lpbmi, dwTargetHeaderSize );
-    memcpy( FindDIBBits( lpResult ), lpTargetBits, dwTargetBitsSize );
+    memcpy( FindDIBBits( (LPSTR)lpResult ), lpTargetBits, dwTargetBitsSize );
 
     // final cleanup
     DeleteObject( hTargetBitmap );
@@ -329,7 +329,7 @@ BOOL CopyColorTable( LPBITMAPINFO lpTarget, LPBITMAPINFO lpSource )
                 PALETTEENTRY    pe[256];
                 UINT            i;
 
-                hPal = GetStockObject( DEFAULT_PALETTE );
+                hPal = (HPALETTE)GetStockObject( DEFAULT_PALETTE );
                 GetPaletteEntries( hPal, 0, 16, pe );
                 for(i=0;i<16;i++)
                 {
@@ -454,7 +454,7 @@ LPBYTE ReadBMPFile( LPCTSTR szFileName )
         return NULL;
     }
     // Allocate some memory
-    if( (lpDIB = malloc( sizeof( BITMAPINFO ) )) == NULL )
+    if( (lpDIB = (LPBYTE)malloc( sizeof( BITMAPINFO ) )) == NULL )
     {
         CloseHandle( hFile );
         MessageBox( NULL, "Failed to allocate memory for DIB", szFileName, MB_OK );
@@ -479,7 +479,7 @@ LPBYTE ReadBMPFile( LPCTSTR szFileName )
     wPaletteSize = PaletteSize((LPSTR)lpDIB);
     dwBitsSize = ((LPBITMAPINFOHEADER)lpDIB)->biHeight * BytesPerLine((LPBITMAPINFOHEADER)lpDIB);
     // realloc to account for the total size of the DIB
-    if( (lpTemp = realloc( lpDIB, sizeof( BITMAPINFOHEADER ) + wPaletteSize + dwBitsSize )) == NULL )
+    if( (lpTemp = (LPBYTE)realloc( lpDIB, sizeof( BITMAPINFOHEADER ) + wPaletteSize + dwBitsSize )) == NULL )
     {
         CloseHandle( hFile );
         MessageBox( NULL, "Failed to allocate memory for DIB", szFileName, MB_OK );
@@ -511,7 +511,7 @@ LPBYTE ReadBMPFile( LPCTSTR szFileName )
         }
     }
     // Read the image bits
-    if( (!ReadFile( hFile, FindDIBBits(lpDIB), dwBitsSize, &dwBytes, NULL )) || (dwBytes!=dwBitsSize) )
+    if( (!ReadFile( hFile, FindDIBBits((LPSTR)lpDIB), dwBitsSize, &dwBytes, NULL )) || (dwBytes!=dwBitsSize) )
     {
         CloseHandle( hFile );
         free( lpDIB );
@@ -556,7 +556,7 @@ BOOL WriteBMPFile( LPCTSTR szFileName, LPBYTE lpDIB )
     bfh.bfType = 0x4d42;
     bfh.bfReserved1 = 0;
     bfh.bfReserved2 = 0;
-    bfh.bfOffBits = sizeof( BITMAPFILEHEADER ) + sizeof( BITMAPINFOHEADER ) + PaletteSize( lpDIB );
+    bfh.bfOffBits = sizeof( BITMAPFILEHEADER ) + sizeof( BITMAPINFOHEADER ) + PaletteSize( (LPSTR)lpDIB );
     bfh.bfSize = (bfh.bfOffBits + ((LPBITMAPINFOHEADER)lpDIB)->biHeight * BytesPerLine((LPBITMAPINFOHEADER)lpDIB))/4;
     // Write the header
     if( ( ! WriteFile( hFile, &bfh, sizeof(BITMAPFILEHEADER), &dwBytes, NULL ) ) || ( dwBytes != sizeof( BITMAPFILEHEADER ) ) )

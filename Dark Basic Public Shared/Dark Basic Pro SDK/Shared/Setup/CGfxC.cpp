@@ -5,6 +5,8 @@
 #include <iostream> // can use STD:: with this include
 #include <vector>
 
+#pragma comment(lib, "d3dx9.lib")
+
 // For DXDIAG version extraction
 #define INITGUID
 #include <dxdiag.h>

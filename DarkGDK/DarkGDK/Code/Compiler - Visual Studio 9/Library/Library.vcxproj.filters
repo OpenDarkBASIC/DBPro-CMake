@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{c45356c8-a39d-46e3-8689-9002fab410d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text">
+      <UniqueIdentifier>{6cd982d5-afed-4e4f-806e-42a387be8ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{29b1eca4-0392-4f1e-bb46-75a963d05f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="File">
+      <UniqueIdentifier>{f316c743-04b6-46e1-af96-85108759e667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Display">
+      <UniqueIdentifier>{98a9bd5a-cee1-4041-9799-0b5304efa362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Basic2D">
+      <UniqueIdentifier>{28f9573f-73aa-4b85-b006-8dfbdd6c35ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bitmap">
+      <UniqueIdentifier>{9217bfbb-b774-47f8-a0ac-00293a6b8c33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{969b43ec-1d5b-4a15-9927-ee7afaf9f5be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Music">
+      <UniqueIdentifier>{902ce6ad-c741-4daf-b5f0-90be2f874fe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprite">
+      <UniqueIdentifier>{2fd3b802-a648-41c0-96ee-5cc15c670c17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{d0c10ec3-b68a-46be-ab8e-570427c77cc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Light">
+      <UniqueIdentifier>{a00b08e7-22d9-4dc1-a06f-ca0249c77d2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{9f8e7ab4-1735-4fc6-bed4-d7357a48daa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Basic3D">
+      <UniqueIdentifier>{377827f6-2d4e-46fb-a87c-1d18058f1a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Matrix">
+      <UniqueIdentifier>{a0f7f40c-d9ef-49be-9f42-1b2cf98a80f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{83a30ce6-6328-4ed5-a621-e346d8fc2faf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particles">
+      <UniqueIdentifier>{cbeef6de-6427-44c4-a5eb-252395879e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DMaths">
+      <UniqueIdentifier>{1eb726a1-a50a-45d0-9cba-ef8c062ed1d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FTP">
+      <UniqueIdentifier>{bbda276d-8888-42bb-826e-c365d1bbf66c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Memblocks">
+      <UniqueIdentifier>{5c08c4e2-7d61-4422-ae68-97a4a64b2354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Multiplayer">
+      <UniqueIdentifier>{28c0cec7-5385-4fff-b506-c138da713b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{b16416f0-edf0-4047-8fcf-d32492324c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{91078521-2bd2-4428-821a-38e1432e8035}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrain">
+      <UniqueIdentifier>{6a134938-27ec-45a6-b3fa-c6d0ccfa0264}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ODEPhysics">
+      <UniqueIdentifier>{cd9c5242-7224-4a7b-9e41-e4c060ee211b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\DarkSDKCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\DarkSDKTerrain.cpp">
+      <Filter>Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\DarkSDK.cpp" />
+    <ClCompile Include="..\..\..\..\Dark Basic Pro SDK\SHARED\Core\globstruct.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Include\DarkSDKCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKText.h">
+      <Filter>Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKInput.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKFile.h">
+      <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKDisplay.h">
+      <Filter>Display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKBasic2D.h">
+      <Filter>Basic2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKBitmap.h">
+      <Filter>Bitmap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKSound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKMusic.h">
+      <Filter>Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKSprites.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKImage.h">
+      <Filter>Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKLight.h">
+      <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKCamera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKBasic3D.h">
+      <Filter>Basic3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKMatrix.h">
+      <Filter>Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKWorld.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKParticles.h">
+      <Filter>Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDK3DMaths.h">
+      <Filter>3DMaths</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKFtp.h">
+      <Filter>FTP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKMemblocks.h">
+      <Filter>Memblocks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKMultiplayer.h">
+      <Filter>Multiplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKSystem.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKTerrain.h">
+      <Filter>Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDKOdePhysics.h">
+      <Filter>ODEPhysics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\DarkSDK.h" />
+    <ClInclude Include="..\..\..\..\Dark Basic Pro SDK\SHARED\Core\globstruct.h" />
+  </ItemGroup>
+</Project>

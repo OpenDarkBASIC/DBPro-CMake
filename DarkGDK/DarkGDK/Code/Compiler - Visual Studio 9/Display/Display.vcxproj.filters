@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Error">
+      <UniqueIdentifier>{b7fc49ee-8688-4f54-afad-d3eeb8054e24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Setup">
+      <UniqueIdentifier>{95abc9f1-01cd-4fbf-8d73-94c2c9ca7a0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Setup\VR920">
+      <UniqueIdentifier>{4fe76df3-4abd-4392-ada6-ed41983289df}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Dark Basic Pro SDK\SHARED\Error\CError.h">
+      <Filter>Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Dark Basic Pro SDK\SHARED\Error\CRuntimeErrors.h">
+      <Filter>Error</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Dark Basic Pro SDK\SHARED\SETUP\CGfxC.h">
+      <Filter>Setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Dark Basic Pro SDK\SHARED\Core\globstruct.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Dark Basic Pro SDK\SHARED\SETUP\CGfxC.cpp">
+      <Filter>Setup</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
